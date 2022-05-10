@@ -11,7 +11,7 @@ block_image_width = 5;
 block_image_height = 5;
 
 function load_img() {
-	fabric.Image.fromURL("golf-h.png", function (Img) {
+	fabric.Image.fromURL("golf-h.png", function(Img) {
 		hole_object = Img;
 		hole_object.scaleToWidth(50);
 		hole_object.scaleToHeight(50);
@@ -26,14 +26,14 @@ function load_img() {
 
 
 function new_image() {
-	fabric.Image.fromURL(get_image, function (Img) {
-		hole_image_object = Img;
-		hole_image_object.scaleToWidth(50);
-		hole_image_object.scaleToHeight(50);
-		hole_image_object.set({
-			top: hole_y, left: hole_x
+	fabric.Image.fromURL("ball.png", function (Img) {
+		ball_object = Img;
+		ball_object.scaleToWidth(50);
+		ball_object.scaleToHeight(50);
+		ball_object.set({
+			top: ball_y, left: ball_x
 		});
-		canvas.add(hole_obj);
+		canvas.add(ball_object);
 	});
 }
 
@@ -43,7 +43,7 @@ function my_keydown(e) {
 	keyPressed = e.keyCode;
 	console.log(keyPressed);
 	if ((ball_x == hole_x) && (ball_y == hole_y)) {
-		canvas.remove(ball_obj);
+		canvas.remove(ball_object);
 		document.getElementById("hd3").innerHTML = "You hit the goal!";
 		document.getElementById("myCanvas").style.borderColor = "red";
 	}
@@ -68,11 +68,11 @@ function my_keydown(e) {
 
 	function up() {
 		// Write a code to move ball upward.
-		if (ball_y <= 5) {
-			ball_y = ball_y + block_image_height;
+		if (ball_y > 5) {
+			ball_y = ball_y - block_image_height;
 			console.log("Block image height =" + block_image_height);
 			console.log("when down arrow key has been pressed,x=" + ball_x + ",y=" + ball_y);
-			canvas.remove(ball_obj);
+			canvas.remove(ball_object);
 			new_image();
 		}
 	}
@@ -82,7 +82,7 @@ function my_keydown(e) {
 				ball_y = ball_y + block_image_height;
 				console.log("Block image height =" + block_image_height);
 				console.log("when down arrow key has been pressed,x=" + ball_x + ",y=" + ball_y);
-				canvas.remove(ball_obj);
+				canvas.remove(ball_object);
 				new_image();
 			}
 
@@ -95,7 +95,7 @@ function my_keydown(e) {
 				ball_x=ball_x-block_image_width;
 				console.log("Block image width =" + block_image_width);
 				console.log("when up arrow key has been pressed,x=" + ball_x + ",y=" + ball_y);
-				canvas.remove(ball_obj);
+				canvas.remove(ball_object);
 				new_image();
 			} 
 		}
@@ -103,10 +103,10 @@ function my_keydown(e) {
 		function right() {
 			if (ball_x <= 1050) {
 				// Write a code to move ball right side.
-				ball_x=player_x+block_image_width;
+				ball_x=ball_x+block_image_width;
         console.log("Block image width =" + block_image_width);
         console.log("when up arrow key has been pressed,x=" + ball_x + ",y=" + ball_y);
-        canvas.remove(ball_obj);
+        canvas.remove(ball_object);
         new_image();
 			}
 		}
